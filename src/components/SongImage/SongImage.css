@@ -1,0 +1,8 @@
+.songImage {
+    background-image: url("../../../public/note.jpg");
+    background-position: center;
+    border: solid red 4px;
+    border-radius: 16px;
+    width: 450px;
+    height: 450px;
+}
