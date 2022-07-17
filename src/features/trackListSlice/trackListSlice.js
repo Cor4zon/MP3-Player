@@ -1,14 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-import acdc from "../../music/acdc.mp3";
-import metallica from "../../music/metallica.mp3";
-import gunsNroses from "../../music/gunsNroses.mp3";
-import cent50 from "../../music/50cent.mp3";
-import eminem from "../../music/eminem.mp3";
+import {getInitialPlaylist} from "../../services/APIClient";
 
 const getInitialTrackList = () => {
     return JSON.parse(localStorage.getItem('trackList')) ||
-        [new Audio(acdc), new Audio(metallica), new Audio(gunsNroses),
-            new Audio(cent50), new Audio(eminem)];
+        getInitialPlaylist();
 }
 
 export const trackListSlice = createSlice({
