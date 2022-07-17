@@ -7,25 +7,25 @@ const Playlist = () => {
     const playTrack = (event) => {
         console.log(event.target.className)
         console.log(trackList);
-        switch (event.target.className) {
-            case "metallica":
-                trackList[0].play();
+        for (let track of trackList) {
+            if (track.title === event.target.className) {
+                track.audio.play();
+                console.log(`track duration⌛️: ${track.audio.duration}`)
                 break;
-            case "acdc":
-                trackList.at(-1).play();
-                break;
-            default:
-                console.log("default")
+            }
         }
     }
+
+    const list = trackList.map((track, id) => {
+        return (
+            <li key={id} className={track.title} onClick={playTrack}> {track.band} – {track.title}</li>
+        )
+    })
+
     return (
         <div>
             <ul>
-                <li onClick={playTrack} className="metallica">Song Metallica</li>
-                <li onClick={playTrack} className="gunsNroses">Song Guns N Roses</li>
-                <li onClick={playTrack} className="cent50">Song 50 Cent</li>
-                <li onClick={playTrack} className="eminem">Song Eminem</li>
-                <li onClick={playTrack} className="acdc">Song AC⚡️DC</li>
+                { list }
             </ul>
         </div>
     );
