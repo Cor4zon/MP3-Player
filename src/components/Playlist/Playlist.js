@@ -11,7 +11,7 @@ const Playlist = () => {
         console.log(trackList);
         for (let track of trackList) {
             if (track.id === +event.target.className) {
-                track.audio.play();
+                // track.audio.play();
                 dispatch(changeSong(+event.target.className))
                 console.log(`track duration⌛️: ${track.audio.duration}`)
                 break;
