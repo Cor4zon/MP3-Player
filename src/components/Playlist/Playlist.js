@@ -1,25 +1,31 @@
-import acdc from "../../music/acdc.mp3";
 import {useState, useEffect} from "react";
+import {useSelector} from "react-redux";
 
 const Playlist = () => {
-    const [sound, setSound] = useState(null);
+    const trackList = useSelector(state => state.trackList.tracks);
 
-    useEffect(() => {
-        setSound(new Audio(acdc));
-    }, []);
-
-    const playSound = () => {
-        sound.play();
+    const playTrack = (event) => {
+        console.log(event.target.className)
+        console.log(trackList);
+        switch (event.target.className) {
+            case "metallica":
+                trackList[0].play();
+                break;
+            case "acdc":
+                trackList.at(-1).play();
+                break;
+            default:
+                console.log("default")
+        }
     }
     return (
         <div>
             <ul>
-                <button onClick={playSound} >PLAY</button>
-                <li>Song Metallica</li>
-                <li>Song Metallica</li>
-                <li>Song Metallica</li>
-                <li>Song Metallica</li>
-                <li>Song Metallica</li>
+                <li onClick={playTrack} className="metallica">Song Metallica</li>
+                <li onClick={playTrack} className="gunsNroses">Song Guns N Roses</li>
+                <li onClick={playTrack} className="cent50">Song 50 Cent</li>
+                <li onClick={playTrack} className="eminem">Song Eminem</li>
+                <li onClick={playTrack} className="acdc">Song AC⚡️DC</li>
             </ul>
         </div>
     );
