@@ -13,7 +13,7 @@ const SongBox = () => {
             {/*    Song image*/}
             <SongImage />
             <SongInfo track={track?.[0]} />
-            <ControlButtons />
+            <ControlButtons track={track?.[0]} />
         </div>
     );
 };
