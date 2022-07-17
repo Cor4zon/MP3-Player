@@ -3,13 +3,14 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretLeft, faPause, faPlay, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import "./ControlButtons.css";
+import {changeSong} from "../../features/chosenSongSlice/chosenSongSlice";
 
 library.add(faCaretLeft);
 library.add(faPause);
 library.add(faPlay);
 library.add(faCaretRight);
 
-const ControlButtons = ({ track }) => {
+const ControlButtons = ({ track, dispatch, playListSize }) => {
     const [ isPlay, setIsPlay ] = useState(false);
     const [ duration, setDuration ] = useState("");
     const [ timePlay, setTimePlay ] = useState(0);
@@ -30,13 +31,25 @@ const ControlButtons = ({ track }) => {
     }
 
     const prevTrack = () => {
-        console.log("Prev track");
+        stopSong();
+        const prevSongId = (track.id === 0) ? playListSize - 1: track.id - 1
+        dispatch(changeSong(prevSongId))
     }
 
     const nextTrack = () => {
-        console.log("Next track");
+        stopSong();
+        const nextSongId = (track.id + 1) % playListSize;
+        console.log(playListSize);
+        console.log(nextSongId);
+        dispatch(changeSong(nextSongId));
     }
 
+    const stopSong = () => {
+        if (isPlay) {
+            track.audio.pause();
+            setIsPlay(false);
+        }
+    }
 
     return (
 

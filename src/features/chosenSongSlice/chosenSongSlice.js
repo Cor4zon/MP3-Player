@@ -12,7 +12,7 @@ export const chosenSongSlice = createSlice({
     reducers: {
         changeSong: (state, action) => {
             state.song = action.payload
-        }
+        },
     }})
 
 export const { changeSong } = chosenSongSlice.actions;
