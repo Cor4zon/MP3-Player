@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { useDispatch } from "react-redux";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretLeft, faPause, faPlay, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import "./ControlButtons.css";
 import {changeSong} from "../../features/chosenSongSlice/chosenSongSlice";
+import PlayButton from "./PlayButton/PlayButton";
 
 library.add(faCaretLeft);
 library.add(faPause);
 library.add(faPlay);
 library.add(faCaretRight);
 
-const ControlButtons = ({ track, dispatch, playListSize }) => {
+const ControlButtons = ({ track, playListSize }) => {
     const [ isPlay, setIsPlay ] = useState(false);
     const [ duration, setDuration ] = useState("");
-    const [ timePlay, setTimePlay ] = useState(0);
+    let dispatch = useDispatch();
 
     useEffect(() => {
         const minutes = Math.floor(track?.audio.duration / 60)
@@ -21,7 +22,7 @@ const ControlButtons = ({ track, dispatch, playListSize }) => {
         setDuration(`${minutes}:${seconds}`)
     }, [track]);
 
-    const playButton = () => {
+    const playTrack = () => {
         if (isPlay) {
             track.audio.pause();
         } else {
@@ -39,8 +40,6 @@ const ControlButtons = ({ track, dispatch, playListSize }) => {
     const nextTrack = () => {
         stopSong();
         const nextSongId = (track.id + 1) % playListSize;
-        console.log(playListSize);
-        console.log(nextSongId);
         dispatch(changeSong(nextSongId));
     }
 
@@ -55,21 +54,14 @@ const ControlButtons = ({ track, dispatch, playListSize }) => {
 
         <div className="controlButtons__container">
             <h1>0:00</h1>
-            <span style={{fontSize: 3 + 'em', color: 'red'}} onClick={prevTrack} >
-                <FontAwesomeIcon icon="fa-solid-6x fa-caret-left" />
-            </span>
 
+            <PlayButton icon="fa-solid-6x fa-caret-left" changeTrack={prevTrack} />
+            { isPlay ?
+                <PlayButton icon="fa-solid fa-pause" changeTrack={playTrack} /> :
+                <PlayButton icon="fa-solid fa-play" changeTrack={playTrack} />
+            }
+            <PlayButton icon="fa-solid-6x fa-caret-right" changeTrack={nextTrack} />
 
-            <span style={{fontSize: 3 + 'em', color: 'red'}} onClick={ playButton } >
-                { isPlay ?
-                    <FontAwesomeIcon icon="fa-solid fa-pause" /> :
-                    <FontAwesomeIcon icon="fa-solid fa-play" />
-                }
-
-            </span>
-            <span style={{fontSize: 3 + 'em', color: 'red'}} onClick={nextTrack} >
-                <FontAwesomeIcon icon="fa-solid fa-caret-right" />
-            </span>
             <h1>{duration}</h1>
         </div>
     );
