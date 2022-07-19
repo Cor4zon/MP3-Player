@@ -1,5 +1,5 @@
 import SongBox from "./components/SongBox/SongBox";
-import Playlist from "./components/Playlist/Playlist";
+import Playlist from "./components/Playlist/PlayList";
 import './App.css';
 
 function App() {

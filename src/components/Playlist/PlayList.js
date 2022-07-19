@@ -22,7 +22,7 @@ const PlayList = () => {
     })
 
     return (
-        <div>
+        <div className="playlist__container">
             <ul>
                 { list }
             </ul>
