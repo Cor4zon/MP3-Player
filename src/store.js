@@ -6,4 +6,9 @@ export default configureStore({
     reducer: {
         trackList: trackListReducer,
         chosenSong: chosenSongReducer,
-    }})
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false
+    })
+
+})

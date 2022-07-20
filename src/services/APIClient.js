@@ -5,13 +5,11 @@ import cent50 from "../music/50cent.mp3";
 import eminem from "../music/eminem.mp3";
 
 
-class Song {
-    constructor(id, band, title, song) {
-        this.id = id;
-        this.band = band;
-        this.title = title;
-        this.audio = new Audio(song);
-    }
+function Song(id, band, title, song) {
+    this.id = id;
+    this.band = band;
+    this.title = title;
+    this.audio = new Audio(song);
 }
 
 export function getInitialPlaylist() {
@@ -23,6 +21,3 @@ export function getInitialPlaylist() {
         new Song(4, "50cent", "Candy Shop", cent50),
     ]
 }
-
-
-
