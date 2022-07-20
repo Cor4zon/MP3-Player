@@ -2,10 +2,10 @@ import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import "./TimeLine.css";
 
-const TimeLine = () => {
+const TimeLine = ({ timePart=80 }) => {
     return (
         <div className="progress-bar__container">
-            <ProgressBar variant="danger" now={80} />
+            <ProgressBar variant="danger" now={timePart} />
         </div>
     );
 };

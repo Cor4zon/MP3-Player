@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCaretLeft, faPause, faPlay, faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import "./ControlButtons.css";
+
 import {changeSong} from "../../features/chosenSongSlice/chosenSongSlice";
 import PlayButton from "./PlayButton/PlayButton";
+import "../Icons/Icons";
+import "./ControlButtons.css";
 
-library.add(faCaretLeft);
-library.add(faPause);
-library.add(faPlay);
-library.add(faCaretRight);
 
-const ControlButtons = ({ track, playListSize }) => {
+const ControlButtons = ({ track, playListSize, showSongTime }) => {
     const [ isPlay, setIsPlay ] = useState(false);
     const [ duration, setDuration ] = useState("");
     let dispatch = useDispatch();
@@ -51,7 +47,6 @@ const ControlButtons = ({ track, playListSize }) => {
     }
 
     return (
-
         <div className="controlButtons__container">
             <h1>0:00</h1>
 

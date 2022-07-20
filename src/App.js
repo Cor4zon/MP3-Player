@@ -4,9 +4,10 @@ import './App.css';
 
 function App() {
   return (
+
     <div className="App">
         <SongBox />
-        <Playlist />
+        <Playlist className="playlist" />
     </div>
   );
 }

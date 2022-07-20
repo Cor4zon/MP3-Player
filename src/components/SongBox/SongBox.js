@@ -12,12 +12,13 @@ const SongBox = () => {
     let songId = useSelector(state => state.chosenSong.song);
     let track = useSelector(state => state.trackList.tracks.filter(track => track.id === songId));
 
+
     return (
         <div className="songBox__container">
             {/*    Song image*/}
             <SongImage />
-            <TimeLine />
             <SongInfo track={track?.[0]} />
+            <TimeLine />
             <ControlButtons track={track?.[0]} playListSize={playListSize} />
         </div>
     );
